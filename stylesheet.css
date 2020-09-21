@@ -148,9 +148,9 @@ body {
   line-height: 22px;
   font-weight: 500;
   position: absolute;
-  top: 13px;
+  top: 3%;
   width: 80px;
-  left: 15px;
+  left: 3%;
 }
 
 .contents .content-left__card .card-left .left-text {
