@@ -1,0 +1,190 @@
+$white: white;
+$green: #9ACC1E;
+$red: #E22255;
+$light-gray: #f6f6f6;
+$gray: gray;
+$gray-footer-tag: #6B6871;
+$footer-background-color: #393542;
+$title-color: #0d0015;
+$title-font: Quicksand, "Noto Sans Japanese", sans-serif;
+$page-tag-hover:#86808A;
+$lg-size: 1020px;
+$md-size: 767px;
+@mixin font($font-size,$font-color){
+    font-size: $font-size; 
+    color: $font-color;  
+    display: inline-block;
+}
+@mixin flex($justify-content) {
+    display: flex;
+    justify-content: $justify-content;
+}
+@mixin tag($font-size,$margin-x,$background-color,$font-color,$background-color-hover,$font-color-hover) {
+    @include flex(flex-start);
+    flex-wrap: wrap;
+    list-style: none;
+    padding-left: 0;
+    &__item {
+        @include font($font-size,$font-color);
+        margin-bottom: 6px;
+        padding: 4px 10px;
+        background-color: $background-color;
+        margin-right: $margin-x;
+        text-decoration: none;
+        border-radius: 2px;
+        &:hover {
+            background-color: $background-color-hover;
+            color: $font-color-hover;
+            transition: 0.5s;
+        }
+        .tag {
+            margin-right: 3px;
+            font-size: 3px;
+        }
+    }
+}
+@mixin container($width) {
+    width: $width;
+    margin-left: auto;
+    margin-right: auto;
+}
+@mixin btn($width,$height,$radius,$background-color) {
+    width: $width;
+    text-align: center;
+    border-radius: $radius;
+    background-color: $background-color;
+    height: $height;
+    line-height: $height;
+}
+
+@mixin page-tag($background-color,$font-color,$background-color-hover,$font-color-hover) {
+    .page-tag {
+        counter-reset:number; /*数字をリセット*/
+        list-style-type: none!important; /*数字を一旦消す*/
+        padding:0.5em;
+        @include flex(center);
+        &__item {
+            position: relative;
+            line-height: 1.5em;
+            padding: 0.5em 0.5em 0.5em 20px;
+            margin: 0 7px 0 7px;
+            &:before {
+                  /* 以下数字をつける */
+                position: absolute;
+                counter-increment: number;
+                content: counter(number);
+                /*以下数字のデザイン変える*/
+                display:inline-block;
+                background: $background-color;
+                color: $font-color;
+                font-weight: 100;
+                font-size: 13px;
+                border-radius: 50%;
+                left: 0;
+                width: 33px;
+                height: 33px;
+                line-height: 33px;
+                text-align: center;
+                /*以下 上下中央寄せのため*/
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                box-shadow: 0 0 3px $gray;
+            }
+            &:hover::before {
+                background-color:$background-color-hover;
+                color: $font-color-hover;
+                top: -5%;
+                transition: 0.5s;
+            }
+        }           
+    }   
+}
+@mixin card-frame {
+    box-shadow: 0 0 2px lighten($gray,30%);
+    border-radius: 3px;
+}
+@mixin right-card-title {
+    border-bottom: solid 2px $title-color;
+    @include font(17px,$title-color);
+    letter-spacing: 1px;
+    font-weight: 100;
+    line-height: 20px;
+    width: 100%;
+}
+@mixin article {
+    text-decoration: none;
+    @include flex(space-between);
+    margin-bottom: 25px;
+    align-items: flex-start;
+    &__img {
+        width: 35%;
+    }
+    &__title {
+        width: 60%;
+        @include font(14px,$title-color);
+        &:hover {
+            color: $red;
+            transition: 0.3s;
+        }
+    }
+}
+@mixin footer-title {
+    &__title {
+        border-left: solid 3px $green;
+        @include font(15px,white);
+        font-weight: 300;
+        letter-spacing: 1px;
+        padding-left: 10px;
+        @media screen and (max-width: $md-size) {
+            border-bottom: solid 2px $green;
+            border-left: none;
+            width: 100%;
+            padding-bottom: 0.8rem;
+
+        }
+    }
+}
+@mixin footer-list-design {
+    @include flex(flex-start);
+    flex-direction: column;
+    padding-left: 0;
+    list-style: none;
+    margin-top: 27px;
+    &__item {
+        text-decoration: none;
+        @include font(11px,white);
+        position: relative;
+        padding-left: 17px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        &:last-child {
+            @media screen and (max-width: $md-size) {
+                border-bottom: none;
+            }
+        }
+        @media screen and(max-width: $md-size) {
+            @include font(13px,white);
+            font-weight: 600;
+            padding-left: 21px;
+            line-height: 50px;
+            margin-bottom: 0;
+            border-bottom: solid 1px white;
+        }
+        &:hover {
+            left: 5px;
+            transition: 0.5s;
+        }
+        &:before {
+            content:">";
+            position: absolute;
+            left: 1px;
+            font-weight: 900;
+            @media screen and (max-width: $md-size) {
+                font-family: "Font Awesome 5 Free";
+                content: '\f138';
+                left: 1px;
+            }
+        }
+    }
+}
